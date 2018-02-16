@@ -24,15 +24,17 @@ Linkin takana on MP3-muodossa "ääneen ajateltuna" tehtävän
 tarkastamisen vaiheet. Linkki ja audiotiedosto on vain tehtävän
 palauttaneen opiskelijan omaan käyttöön, eikä sitä jaeta muille
 tahoille. Sen tarkoitus on taltioida reaaliaikainen tilannekuva, jota
-viimeistelty tekstimuotoinen palaute ei pysty sisältämään.
+viimeistelty tekstimuotoinen palaute ei pysty sisältämään. Nauhoite on
+tehty peräkkäisissä pätkissä, joten se on ajallisesti paljonkin
+lyhyempi kuin mitä varsinainen tarkastaminen kesti.
 
 Tallenne liittyy vuonna 2018 tehtävään tutkimukseen, jossa opettaja on
-"koehenkilönä" ja dataksi kerätään kokemuksia audiotallenteesta
-palautteen muotona. Saamasi palautteen sisältö ei siis liity
-tutkimukseen, eikä sitä toimiteta eteenpäin muille. Halutessasi voit
-antaa "palautetta palautteesta", sillä opiskelijapalaute on omiaan
-vaikuttamaan tutkittavaan asiaan eli opettajan omaan käsitykseen
-audiopalautteesta.
+"koehenkilönä" ja dataksi kerätään opettajan kokemuksia
+audiotallenteesta palautteen muotona. Saamasi palautteen sisältö ei
+siis liity tutkimukseen, eikä sitä toimiteta eteenpäin
+muille. Halutessasi voit kuitenkin antaa "palautetta palautteesta",
+sillä opiskelijapalaute on omiaan vaikuttamaan tutkittavaan asiaan eli
+opettajan omaan käsitykseen audiopalautteesta.
 
 Äänitiedostoja ei säilytetä kurssin jälkeen, joten lataa MP3-tiedosto
 itsellesi, jos haluat palata siihen myöhemmin.

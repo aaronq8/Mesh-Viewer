@@ -1,5 +1,5 @@
 Palaute
--------
+#######
 
 TIEA311 Tietokonegrafiikan perusteet, kevät 2018, "Assignment 0"
 
@@ -13,7 +13,7 @@ Perustelu ja korjausohjeet, jos Korppiin merkitty poikkeaa itsearviosta:
 Yksityiskohtaiset havainnot jäljempänä.
 
 Kommenttiraita
---------------
+==============
 
 HUOM: Tämän tehtävän tarkastuksesta on saatavilla myös valinnainen
 "kommenttiraita" MP3-muodossa:
@@ -41,9 +41,21 @@ itsellesi, jos haluat palata siihen myöhemmin.
 
 
 Yksityiskohtaisia poimintoja vastauksesta
------------------------------------------
+=========================================
 
 (täytetään tarvittaessa; aikataulusyistä erityisesti "riittävän
 hyvään" tai "oletuksen mukaiseen" vastaukseen jätetään tämä
 viesti. Palautettahan se on tavallaan sekin.)
+
+Diffatessa havaittua ("-" poistettu rivi; "+" lisätty rivi)
+-----------------------------------------------------------
+
+Käännösvaiheessa havaittua
+-----------------------------------------------------------
+
+Ohjelmaa ajaessa havaittua
+-----------------------------------------------------------
+
+Muuta
+-----------------------------------------------------------
 

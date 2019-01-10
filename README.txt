@@ -15,7 +15,7 @@ IMPORTANT:
   for example on the university server.
 
 - Do not be a freeloader: Some student answers seem to be available
-  around the WWW.. Observe, first of all, that plagiarism is a major
+  around the WWW ... Observe, first of all, that plagiarism is a major
   offence, subject to severe punishments and resulting shame.
 
   Perhaps more importantly, you will not learn by brainless

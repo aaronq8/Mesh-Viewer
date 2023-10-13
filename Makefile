@@ -6,15 +6,20 @@
 # - Added the full source code of the vecmath library as given in 2012.
 # - Build libvecmath.a to current working directory and link from there.
 # - Updated also clean target; added "veryclean" to rid of library.
-#
+# - Build on macOS requires GLUT and OpenGL as frameworks instead of libraries
+# - Removed f flag from ar call in building libvecmath.a
 .PHONY: all clean veryclean
 INCFLAGS  = -I /usr/include/GL
 INCFLAGS += -I ./vecmath/include
 
-LINKFLAGS = -lglut -lGL -lGLU
+ifeq ($(UNAME_S),Darwin)
+	LINKFLAGS = -framework GLUT -framework OpenGL
+else
+	LINKFLAGS = -lglut -lGL -lGLU
+endif
 LINKFLAGS += -L ./ -lvecmath
 
-CFLAGS    = -O2 -Wall -ansi -DSOLN
+CFLAGS    = -O2 -Wall -DSOLN
 CC        = g++
 SRCS      = main.cpp
 OBJS      = $(SRCS:.cpp=.o)
@@ -27,7 +32,7 @@ all: $(SRCS) $(PROG)
 
 libvecmath.a: $(addprefix vecmath/src/,$(VECMATHSRC))
 	g++ -c $(CFLAGS) $(INCFLAGS) $(addprefix vecmath/src/,$(VECMATHSRC))
-	ar crf $@ $(VECMATHOBJ)
+	ar cr $@ $(VECMATHOBJ)
 
 $(PROG): $(OBJS) libvecmath.a
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LINKFLAGS)

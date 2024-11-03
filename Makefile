@@ -10,6 +10,7 @@
 # - Removed f flag from ar call in building libvecmath.a
 .PHONY: all clean veryclean
 INCFLAGS  = -I /usr/include/GL
+INCFLAGS += -I ./include
 INCFLAGS += -I ./vecmath/include
 
 ifeq ($(UNAME_S),Darwin)
@@ -21,7 +22,7 @@ LINKFLAGS += -L ./ -lvecmath
 
 CFLAGS    = -O2 -Wall -DSOLN
 CC        = g++
-SRCS      = main.cpp
+SRCS      = main.cpp mesh.cpp
 OBJS      = $(SRCS:.cpp=.o)
 PROG      = a0
 

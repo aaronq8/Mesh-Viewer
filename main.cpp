@@ -12,10 +12,11 @@
 #include <sstream>
 #include <vector>
 #include <vecmath.h>
+#include <mesh.h>
 using namespace std;
 
 // Globals
-
+Mesh mesh{"./torus.obj"};
 // This is the list of points (3D vectors)
 vector<Vector3f> vecv;
 
@@ -24,8 +25,18 @@ vector<Vector3f> vecn;
 
 // This is the list of faces (indices into vecv and vecn)
 vector<vector<unsigned> > vecf;
+//Color index
+int COLOR_INDEX = 0;
+GLfloat COLOR_CASE[4][4] = { 
+    {0.5, 0.5, 0.9, 1.0},
+    {0.9, 0.5, 0.5, 1.0},
+    {0.5, 0.9, 0.3, 1.0},
+    {0.3, 0.8, 0.9, 1.0} 
+};
 
-
+// Light position
+float x_offset = 0;
+float y_offset = 0;
 // You will need more global variables to implement color and position changes
 
 
@@ -42,15 +53,17 @@ void keyboardFunc(unsigned char key, int x, int y) {
     case 27: // Escape key
         exit(0);
         break;
-    case 'c':
+    case 'c':{
         // add code to change color here
-        cout << "Unhandled key press " << key << "." << endl;
+        cout << "Change Color " << key << "." << endl;
+        ++COLOR_INDEX;COLOR_INDEX%=4;
         break;
+    }
     default:
         cout << "Unhandled key press " << key << "." << endl;
     }
-
     // this will refresh the screen so that the user sees the color change
+    //drawScene on next frame
     glutPostRedisplay();
 }
 
@@ -60,19 +73,23 @@ void specialFunc(int key, int x, int y) {
     switch (key) {
     case GLUT_KEY_UP:
         // add code to change light position
-        cout << "Unhandled key press: up arrow." << endl;
+        cout << "up arrow." << endl;
+        y_offset+=(0.5f);
         break;
     case GLUT_KEY_DOWN:
         // add code to change light position
-        cout << "Unhandled key press: down arrow." << endl;
+        cout << "down arrow." << endl;
+        y_offset-=(0.5f);
         break;
     case GLUT_KEY_LEFT:
         // add code to change light position
-        cout << "Unhandled key press: left arrow." << endl;
+        cout << "left arrow." << endl;
+        x_offset-=(0.5f);
         break;
     case GLUT_KEY_RIGHT:
         // add code to change light position
-        cout << "Unhandled key press: right arrow." << endl;
+        cout << "right arrow." << endl;
+        x_offset+=(0.5f);
         break;
     }
 
@@ -98,15 +115,8 @@ void drawScene(void) {
               0.0, 1.0, 0.0);
 
     // Set material properties of object
-
-    // Here are some colors you might use - feel free to add more
-    GLfloat diffColors[4][4] = { {0.5, 0.5, 0.9, 1.0},
-                                 {0.9, 0.5, 0.5, 1.0},
-                                 {0.5, 0.9, 0.3, 1.0},
-                                 {0.3, 0.8, 0.9, 1.0} };
-
     // Here we use the first color entry as the diffuse color
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffColors[0]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, COLOR_CASE[COLOR_INDEX]);
 
     // Define specular color and shininess
     GLfloat specColor[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -120,15 +130,15 @@ void drawScene(void) {
 
     // Light color (RGBA)
     GLfloat Lt0diff[] = { 1.0,1.0,1.0,1.0 };
-    // Light position
-    GLfloat Lt0pos[] = { 1.0f, 1.0f, 5.0f, 1.0f };
+    GLfloat Lt0pos[] = { 1.0f + x_offset, 1.0f + y_offset, 5.0f, 1.0f };
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE, Lt0diff);
     glLightfv(GL_LIGHT0, GL_POSITION, Lt0pos);
 
     // This GLUT method draws a teapot.  You should replace
     // it with code which draws the object you loaded.
-    glutSolidTeapot(1.0);
+    //glutSolidTeapot(1.0);
+    mesh.draw_obj();
 
     // Dump the image to the screen.
     glutSwapBuffers();
@@ -163,6 +173,7 @@ void reshapeFunc(int w, int h) {
 
 void loadInput() {
     // load the OBJ file here
+    mesh.load_obj();
 }
 
 // Main routine.
@@ -177,7 +188,7 @@ int main(int argc, char** argv) {
 
     // Initial parameters for window position and size
     glutInitWindowPosition(60, 60);
-    glutInitWindowSize(360, 360);
+    glutInitWindowSize(800, 600);
     glutCreateWindow("Assignment 0");
 
     // Initialize OpenGL parameters.

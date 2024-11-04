@@ -16,7 +16,7 @@
 using namespace std;
 
 // Globals
-Mesh mesh{"./torus.obj"};
+Mesh mesh{"./garg.obj"};
 // This is the list of points (3D vectors)
 vector<Vector3f> vecv;
 
@@ -33,7 +33,8 @@ GLfloat COLOR_CASE[4][4] = {
     {0.5, 0.9, 0.3, 1.0},
     {0.3, 0.8, 0.9, 1.0} 
 };
-
+int ANGLE = 0;
+bool rotate_flag = false;
 // Light position
 float x_offset = 0;
 float y_offset = 0;
@@ -57,6 +58,13 @@ void keyboardFunc(unsigned char key, int x, int y) {
         // add code to change color here
         cout << "Change Color " << key << "." << endl;
         ++COLOR_INDEX;COLOR_INDEX%=4;
+        if(!rotate_flag)glutPostRedisplay();
+        break;
+    }
+    case 'r':{
+        cout << "Change Color " << key << "." << endl;
+        rotate_flag = rotate_flag^1;
+        if(rotate_flag)glutPostRedisplay();
         break;
     }
     default:
@@ -64,7 +72,6 @@ void keyboardFunc(unsigned char key, int x, int y) {
     }
     // this will refresh the screen so that the user sees the color change
     //drawScene on next frame
-    glutPostRedisplay();
 }
 
 // This function is called whenever a "Special" key press is received.
@@ -97,6 +104,17 @@ void specialFunc(int key, int x, int y) {
     glutPostRedisplay();
 }
 
+void update_rotation_angle(int value){
+    ANGLE+=value;
+    if(ANGLE>=360)ANGLE%=360;
+}
+
+void enqueue_draw_call(int val){
+    std::cout<<"enqueued Draw \n";
+    update_rotation_angle(val);
+    glutPostRedisplay();
+}
+
 // This function is responsible for displaying the object.
 void drawScene(void) {
     int i;
@@ -113,7 +131,7 @@ void drawScene(void) {
     gluLookAt(0.0, 0.0, 5.0,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
-
+    
     // Set material properties of object
     // Here we use the first color entry as the diffuse color
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, COLOR_CASE[COLOR_INDEX]);
@@ -137,13 +155,20 @@ void drawScene(void) {
 
     // This GLUT method draws a teapot.  You should replace
     // it with code which draws the object you loaded.
-    //glutSolidTeapot(1.0);
+    //save model view matrix
+    glPushMatrix();
+    //add rotation transformation
+    glRotatef(ANGLE,0.0f,1.0f,0.0f);
+    //draw
     mesh.draw_obj();
-
+    //restore old modelview matrix
+    glPopMatrix();
     // Dump the image to the screen.
     glutSwapBuffers();
-
-
+    if(rotate_flag){
+        //register callback for rotation
+        glutTimerFunc(100,enqueue_draw_call,10);
+    }
 }
 
 // Initialize OpenGL's rendering modes
